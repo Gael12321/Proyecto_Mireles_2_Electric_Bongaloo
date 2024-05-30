@@ -1,0 +1,163 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %}
+    Añadir material
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'lista_materiales.css' %}">
+<style>
+  .container {
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .btn {
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border: 1px solid #6c757d;
+    color: #fff;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+
+  select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+
+  .btn-container {
+    margin-top: 20px;
+    text-align: right;
+  }
+</style>
+
+<div class="container">
+  <form method="post" enctype="multipart/form-data" id="agregarProductoForm">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_nombre_articulo">Nombre del Artículo:</label>
+      {{ form.nombre_articulo }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_precio_unitario">Precio Unitario:</label>
+      {{ form.precio_unitario }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_categoria">Categoría:</label>
+      {{ form.categoria }}
+    </div>
+
+    <div class="form-group">
+      <label>¿Se vende paquetes?</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="unidades_o_paquetes" id="unidades" value="True" checked>
+        <label class="form-check-label" for="unidades">
+          Sí
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="unidades_o_paquetes" id="paquetes" value="False">
+        <label class="form-check-label" for="paquetes">
+          No
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group" id="paquetesOptions" style="display: none;">
+      <label for="id_cantidad_por_paquete">Cantidad por paquete:</label>
+      {{ form.cantidad_por_paquete }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_cantidad">Cantidad:</label>
+      {{ form.cantidad }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_imagen">Imagen:</label>
+      {{ form.imagen }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_descripcion">Descripción:</label>
+      {{ form.descripcion }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_umbral">Umbral mínimo:</label>
+      {{ form.umbral }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_origen">Origen:</label>
+      {{ form.origen }}
+    </div>
+
+    <div class="form-group">
+      <div class="btn-container">
+        <button type="submit" class="btn btn-primary">Agregar Producto</button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'lista_materiales' %}'">Cancelar</button>
+      </div>
+    </div>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#unidades').change(function() {
+        if ($(this).is(':checked')) {
+          $('#paquetesOptions').show();
+        } else {
+          $('#paquetesOptions').hide();
+        }
+      });
+      $('#paquetes').change(function() {
+        if ($(this).is(':checked')) {
+          $('#paquetesOptions').hide();
+        } else {
+          $('#paquetesOptions').show();
+        }
+      });
+
+      $('#unidades').trigger('change');
+    });
+  </script>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'inicio_sesion.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Error en el inicio de sesión.</strong> Por favor, verifica tus credenciales e inténtalo nuevamente.
+            </div>
+        {% endif %}
+
+        <div class="login">
+            <h2 class="active">Iniciar Sesión</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.username }}
+                <br>
+                {{ form.password }}
+                <br>
+                <button class="signin" type="submit">Iniciar Sesión</button>
+            </form>
+            <p>¿No tienes una cuenta? <a href="{% url 'crear_usuario' %}">Crear una cuenta</a></p>
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>
