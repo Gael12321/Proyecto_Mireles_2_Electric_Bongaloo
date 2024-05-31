@@ -15,14 +15,14 @@ from .forms import FormularioAgregarProducto, FormularioProducto, FormularioToma
 
 class ListaProductos(ListView):
     model = Producto
-    template_name = 'productos/lista_material.html'
+    template_name = 'productos/lista_producto.html'
     context_object_name = 'productos'
     
 class AñadirProducto(CreateView):
     model = Producto
     form_class = FormularioProducto
-    template_name = 'productos/añadir_material.html'
-    success_url = reverse_lazy('lista_material')
+    template_name = 'productos/añadir_producto.html'
+    success_url = reverse_lazy('lista_productos')
     
     def post(self, request, *args, **kwargs):
         form = FormularioProducto(request.POST, request.FILES)
@@ -34,15 +34,15 @@ class AñadirProducto(CreateView):
                 units=form.cleaned_data['quantity'],
                 umbal=form.cleaned_data['umbal']
             )
-            return HttpResponseRedirect(reverse_lazy("lista_material"))
+            return HttpResponseRedirect(reverse_lazy("lista_productos"))
         else:
-            return render(request, 'productos/añadir_material.html', {'form': form})
+            return render(request, 'productos/añadir_producto.html', {'form': form})
 
 class EditarProducto(UpdateView):
     model = Producto
     template_name = 'productos/editar_producto.html'
     form_class = FormularioProducto
-    success_url = reverse_lazy('lista_material')
+    success_url = reverse_lazy('lista_productos')
 
     @transaction.atomic
     def form_valid(self, form):
@@ -56,7 +56,7 @@ class EditarProducto(UpdateView):
 class AgregarProducto(FormView):
     template_name = 'productos/agregar_producto.html'
     form_class = FormularioAgregarProducto
-    success_url = reverse_lazy('lista_material')
+    success_url = reverse_lazy('lista_productos')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -97,14 +97,14 @@ class TomarProductoView(TemplateView):
                 if existencia.units <= existencia.umbal:
                     # Crear reporte si las unidades son menores o iguales al umbral
                     pass
-                return HttpResponseRedirect(reverse_lazy('lista_material') + '?taken=true')
+                return HttpResponseRedirect(reverse_lazy('lista_productos') + '?taken=true')
             else:
                 form.add_error('cantidad_a_tomar', 'La cantidad deseada es mayor a la cantidad disponible.')
         return self.render_to_response(self.get_context_data(form=form))
 
 class EliminarProducto(DeleteView):
     model = Producto
-    success_url = reverse_lazy('lista_material')
+    success_url = reverse_lazy('lista_productos')
     template_name = 'productos/confirmar_eliminar.html'
         
 

@@ -1,0 +1,115 @@
+/* Style for the table container */
+.table-container {
+  margin-top: 20px;
+}
+
+/* Style for the table */
+.table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+}
+
+/* Style for table headers */
+thead th {
+  background-color: #1161ed;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Style for table rows */
+tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Style for alternating row colors */
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style for table cells */
+td, th {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+}
+
+/* Añade recuadros de colores a las acciones */
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions a {
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center; /* Centra el texto */
+  margin: 0 5px; /* Agrega separación entre los botones */
+}
+
+/* Estilos para los botones de acciones */
+.editar {
+  background-color: #ffc107;
+  border: 1px solid #ffc107;
+  color: #fff;
+}
+
+.reabastecer {
+  background-color: #17a2b8;
+  border: 1px solid #17a2b8;
+  color: #fff;
+}
+
+.eliminar {
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+  color: #fff;
+}
+
+
+.botones-container {
+  text-align: center;
+}
+
+/* Estilos para los botones */
+.btn {
+  display: inline-block;
+  padding: 8px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 10px; /* Ajusta el margen horizontal según sea necesario */
+  
+  /* Colores para los botones específicos */
+  
+  &.btn-volver-portal {
+    background-color: #ffc107;
+    border: 1px solid #ffc107;
+    color: #fff;
+    margin-left: 80px;
+  }
+  
+  &.btn-ver-carrito {
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+    color: #fff;
+  }
+  
+  &.btn-agregar-material {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: #fff;
+  }
+  
+  &.btn-agregar-todos {
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+    color: #fff;
+  }
+}
+
